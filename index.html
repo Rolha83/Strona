@@ -7,64 +7,99 @@
     <style>
         :root {
             --primary: #1B4F72;
+            --primary-dark: #153d5a;
             --accent: #2980B9;
+            --accent-soft: #dff2ff;
             --bg: #F4F6F9;
             --card: #FFFFFF;
             --text: #333333;
+            --tinkercad: #0B9D8A;
+            --tinkercad-dark: #0a7f72;
+            --shadow: rgba(13, 36, 56, 0.12);
         }
 
         * { box-sizing: border-box; }
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: var(--bg);
+            background: linear-gradient(180deg, #edf3f9 0%, var(--bg) 100%);
             margin: 0;
             padding: 0;
             color: var(--text);
         }
 
         header {
-            background: var(--primary);
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
             color: white;
-            padding: 30px;
+            padding: 38px 20px 28px;
             text-align: center;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+        }
+
+        .school-badge {
+            display: inline-block;
+            background: rgba(255,255,255,0.12);
+            border: 1px solid rgba(255,255,255,0.25);
+            border-radius: 999px;
+            padding: 8px 16px;
+            font-size: 0.8rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            font-weight: 700;
+            margin-bottom: 14px;
+        }
+
+        h1 {
+            margin: 0;
+            font-size: clamp(2rem, 3vw, 3rem);
+            letter-spacing: 0.02em;
+        }
+
+        .subtitle {
+            margin: 12px auto 0;
+            font-size: 1.03rem;
+            color: rgba(255,255,255,0.9);
+            max-width: 620px;
         }
 
         .container {
-            max-width: 1000px;
+            max-width: 1100px;
             margin: 40px auto;
             padding: 0 20px;
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
             gap: 25px;
         }
 
         .card {
             background: var(--card);
-            border-radius: 16px;
-            padding: 30px;
-            box-shadow: 0 6px 20px rgba(0,0,0,0.06);
+            border-radius: 18px;
+            padding: 28px 24px;
+            box-shadow: 0 8px 26px var(--shadow);
             border-top: 6px solid var(--accent);
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            transition: transform 0.2s;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
         }
 
         .card:hover {
             transform: translateY(-5px);
+            box-shadow: 0 12px 30px rgba(27, 79, 114, 0.12);
         }
 
         .card h2 {
             color: var(--primary);
             margin-top: 0;
+            margin-bottom: 12px;
+            font-size: 1.5rem;
         }
 
         .card p {
             color: #666;
-            font-size: 0.95em;
-            line-height: 1.5;
+            font-size: 0.97em;
+            line-height: 1.6;
+            margin: 0;
         }
 
         .btn {
@@ -72,47 +107,69 @@
             background: var(--accent);
             color: white;
             text-decoration: none;
-            padding: 12px 20px;
-            border-radius: 8px;
-            font-weight: bold;
+            padding: 12px 18px;
+            border-radius: 10px;
+            font-weight: 700;
             text-align: center;
-            margin-top: 20px;
-            transition: background 0.2s;
+            margin-top: 22px;
+            transition: background 0.2s ease, transform 0.2s ease;
+            box-shadow: 0 6px 14px rgba(41, 128, 185, 0.18);
         }
 
         .btn:hover {
             background: var(--primary);
+            transform: translateY(-1px);
+        }
+
+        .card.tinkercad {
+            border-top-color: var(--tinkercad);
+        }
+
+        .card.tinkercad .btn {
+            background: var(--tinkercad);
+            box-shadow: 0 6px 14px rgba(11, 157, 138, 0.22);
+        }
+
+        .card.tinkercad .btn:hover {
+            background: var(--tinkercad-dark);
+        }
+
+        .icon {
+            display: inline-block;
+            margin-right: 8px;
+            font-size: 1.2rem;
         }
     </style>
 </head>
 <body>
 
 <header>
+    <div class="school-badge">Szkolny portal edukacyjny</div>
     <h1>🌟 Szkolna Pracownia Edukacyjna</h1>
-    <p>Wybierz zajęcia</p>
+    <p class="subtitle">Wybierz temat i rozpocznij naukę — odkrywaj, twórz i ćwicz w nowoczesny sposób.</p>
 </header>
 
 <div class="container">
     <div class="card">
         <div>
-            <h2>💻 Galaktyka Informatyki</h2>
-            <p>Scratch, Tinkercad i zadania dla klas 1–4.</p>
+            <h2><span class="icon">💻</span>Galaktyka Informatyki</h2>
+            <p>Scratch, Tinkercad i zadania dla klas 1–4. Strefa kreatywnego uczenia i ćwiczeń praktycznych.</p>
         </div>
         <a href="https://rolha83.github.io/Galaktyka-informatyki/" class="btn">Przejdź do Informatyki</a>
     </div>
 
     <div class="card">
         <div>
-            <h2>📐 Matematyka – Konkurs Leon</h2>
-            <p>Arkusze i zadania treningowe dla klas 2–4.</p>
+            <h2><span class="icon">📐</span>Matematyka – Konkurs Leon</h2>
+            <p>Arkusze, zadania treningowe i materiały dla klas 2–4 z prostym i sprawnym dostępem do ćwiczeń.</p>
         </div>
         <a href="https://rolha83.github.io/Matematyka/" class="btn">Przejdź do Matematyki</a>
     </div>
 
-    <div class="card">
+    <div class="card tinkercad">
         <div>
-            <h2>🧩 Tinkercad</h2>
-            <p>Twórz proste modele 3D i ćwicz projektowanie online.</p>
+            <h2><span class="icon">🧩</span>Tinkercad</h2>
+            <p>Twórz proste modele 3D, ucz się projektowania i rozwijaj kreatywność dzięki platformie online.</p>
         </div>
         <a href="https://www.tinkercad.com/" target="_blank" rel="noopener noreferrer" class="btn">Otwórz Tinkercad</a>
     </div>
