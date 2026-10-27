@@ -3,358 +3,177 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Karta Odpowiedzi – Konkurs Matematyczny Leon</title>
+    <title>Szkolna Platforma Edukacyjna</title>
     <style>
         :root {
-            --primary: #2563eb;
-            --primary-hover: #1d4ed8;
-            --bg: #f8fafc;
-            --card-bg: #ffffff;
-            --text: #1e293b;
-            --border: #e2e8f0;
-            --success-bg: #dcfce7;
-            --success-border: #86efac;
-            --success-text: #166534;
+            --primary: #1B4F72;
+            --primary-dark: #153d5a;
+            --accent: #2980B9;
+            --accent-soft: #dff2ff;
+            --bg: #F4F6F9;
+            --card: #FFFFFF;
+            --text: #333333;
+            --tinkercad: #0B9D8A;
+            --tinkercad-dark: #0a7f72;
+            --shadow: rgba(13, 36, 56, 0.12);
         }
 
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
+        * { box-sizing: border-box; }
 
         body {
-            background-color: var(--bg);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(180deg, #edf3f9 0%, var(--bg) 100%);
+            margin: 0;
+            padding: 0;
             color: var(--text);
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
         }
 
         header {
-            background-color: var(--card-bg);
-            padding: 0.8rem 1.5rem;
-            border-bottom: 1px solid var(--border);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+            padding: 38px 20px 28px;
+            text-align: center;
+            box-shadow: 0 6px 18px rgba(0,0,0,0.08);
         }
 
-        header h1 {
-            font-size: 1.2rem;
-            color: var(--primary);
+        .school-badge {
+            display: inline-block;
+            background: rgba(255,255,255,0.12);
+            border: 1px solid rgba(255,255,255,0.25);
+            border-radius: 999px;
+            padding: 8px 16px;
+            font-size: 0.8rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            font-weight: 700;
+            margin-bottom: 14px;
+        }
+
+        h1 {
+            margin: 0;
+            font-size: clamp(2rem, 3vw, 3rem);
+            letter-spacing: 0.02em;
+        }
+
+        .subtitle {
+            margin: 12px auto 0;
+            font-size: 1.03rem;
+            color: rgba(255,255,255,0.9);
+            max-width: 620px;
         }
 
         .container {
-            display: flex;
-            flex: 1;
-            overflow: hidden;
+            max-width: 1100px;
+            margin: 40px auto;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 25px;
         }
 
-        /* Lewy panel – Podgląd pliku PDF */
-        .pdf-viewer-container {
-            flex: 1;
-            border-right: 1px solid var(--border);
-            background-color: #525659;
+        .card {
+            background: var(--card);
+            border-radius: 18px;
+            padding: 28px 24px;
+            box-shadow: 0 8px 26px var(--shadow);
+            border-top: 6px solid var(--accent);
             display: flex;
             flex-direction: column;
-        }
-
-        .toolbar {
-            background: #323639;
-            color: #fff;
-            padding: 0.6rem 1rem;
-            font-size: 0.9rem;
-            display: flex;
-            gap: 0.8rem;
-            align-items: center;
-        }
-
-        .toolbar select {
-            padding: 0.3rem 0.6rem;
-            border-radius: 4px;
-            border: none;
-            background: #fff;
-            color: var(--text);
-            font-weight: 600;
-            cursor: pointer;
-            max-width: 100%;
-        }
-
-        .pdf-viewer-container iframe {
-            width: 100%;
-            height: 100%;
-            border: none;
-        }
-
-        /* Prawy panel – Karta odpowiedzi */
-        .answer-card {
-            flex: 1;
-            padding: 1.5rem 2rem;
-            overflow-y: auto;
-            background-color: var(--card-bg);
-        }
-
-        .student-info {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 1rem;
-            margin-bottom: 1.2rem;
-            padding: 0.8rem;
-            background: #f1f5f9;
-            border-radius: 8px;
-            border: 1px solid var(--border);
-        }
-
-        .student-info input {
-            width: 100%;
-            padding: 0.4rem 0.6rem;
-            border: 1px solid var(--border);
-            border-radius: 4px;
-            text-transform: uppercase;
-        }
-
-        .questions-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 0.8rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .question-item {
-            padding: 0.6rem 0.8rem;
-            border: 1px solid var(--border);
-            border-radius: 6px;
-            background-color: #fafafa;
-            display: flex;
-            align-items: center;
             justify-content: space-between;
-            transition: background-color 0.3s, border-color 0.3s;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
         }
 
-        .question-item.correct {
-            background-color: #dcfce7;
-            border-color: #86efac;
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 30px rgba(27, 79, 114, 0.12);
         }
 
-        .question-item.incorrect {
-            background-color: #fee2e2;
-            border-color: #fca5a5;
+        .card h2 {
+            color: var(--primary);
+            margin-top: 0;
+            margin-bottom: 12px;
+            font-size: 1.5rem;
         }
 
-        .question-item label.q-num {
-            font-weight: 600;
-            font-size: 0.9rem;
-            min-width: 80px;
+        .card p {
+            color: #666;
+            font-size: 0.97em;
+            line-height: 1.6;
+            margin: 0;
         }
 
-        .options {
-            display: flex;
-            gap: 0.8rem;
-        }
-
-        .options label {
-            font-size: 0.85rem;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 0.2rem;
-        }
-
-        button.btn-submit {
-            width: 100%;
-            background-color: var(--primary);
+        .btn {
+            display: inline-block;
+            background: var(--accent);
             color: white;
-            padding: 0.9rem;
-            border: none;
-            border-radius: 6px;
-            font-size: 1rem;
-            font-weight: bold;
-            cursor: pointer;
-            transition: background 0.2s;
-        }
-
-        button.btn-submit:hover {
-            background-color: var(--primary-hover);
-        }
-
-        /* Sekcja wyników AI */
-        #ai-result {
-            margin-top: 1.2rem;
-            padding: 1rem;
-            border-radius: 6px;
-            display: none;
-        }
-
-        .result-success {
-            background-color: var(--success-bg);
-            border: 1px solid var(--success-border);
-            color: var(--success-text);
-        }
-
-        .loading {
-            display: none;
+            text-decoration: none;
+            padding: 12px 18px;
+            border-radius: 10px;
+            font-weight: 700;
             text-align: center;
-            margin-top: 1rem;
-            font-style: italic;
-            color: #64748b;
+            margin-top: 22px;
+            transition: background 0.2s ease, transform 0.2s ease;
+            box-shadow: 0 6px 14px rgba(41, 128, 185, 0.18);
         }
 
-        .details-list {
-            margin-top: 0.8rem;
-            font-size: 0.85rem;
-            max-height: 250px;
-            overflow-y: auto;
-            border-top: 1px dashed var(--success-border);
-            padding-top: 0.5rem;
+        .btn:hover {
+            background: var(--primary);
+            transform: translateY(-1px);
         }
 
-        @media (max-width: 900px) {
-            .container {
-                flex-direction: column;
-            }
-            .pdf-viewer-container {
-                height: 45vh;
-            }
+        .card.tinkercad {
+            border-top-color: var(--tinkercad);
+        }
+
+        .card.tinkercad .btn {
+            background: var(--tinkercad);
+            box-shadow: 0 6px 14px rgba(11, 157, 138, 0.22);
+        }
+
+        .card.tinkercad .btn:hover {
+            background: var(--tinkercad-dark);
+        }
+
+        .icon {
+            display: inline-block;
+            margin-right: 8px;
+            font-size: 1.2rem;
         }
     </style>
 </head>
 <body>
 
-    <header>
-        <h1>Karta Odpowiedzi – Konkurs Matematyczny Leon</h1>
-        <span>Weryfikacja AI 🤖</span>
-    </header>
+<header>
+    <div class="school-badge">Szkolny portal edukacyjny</div>
+    <h1>🌟 Szkolna Pracownia Edukacyjna</h1>
+    <p class="subtitle">Wybierz temat i rozpocznij naukę — odkrywaj, twórz i ćwicz w nowoczesny sposób.</p>
+</header>
 
-    <div class="container">
-        <!-- Lewy panel: Podgląd arkusza PDF -->
-        <div class="pdf-viewer-container">
-            <div class="toolbar">
-                <label for="pdfSelector">Wybierz arkusz zadań:</label>
-                <select id="pdfSelector" onchange="updateSheet()">
-                    <!-- Klasa 1 -->
-                    <option value="k1_w2025">Klasa 1 – Wiosna 2025 (25 zadań)</option>
-                    <option value="k1_j2024">Klasa 1 – Jesień 2024 (24 zadania)</option>
-                    <option value="k1_w2024">Klasa 1 – Wiosna 2024 (25 zadań)</option>
-                    <option value="k1_j2023">Klasa 1 – Jesień 2023 (23 zadania)</option>
-                    <!-- Klasa 2 -->
-                    <option value="k2_w2025">Klasa 2 – Wiosna 2025 (25 zadań)</option>
-                    <option value="k2_j2024">Klasa 2 – Jesień 2024 (24 zadania)</option>
-                    <option value="k2_w2024">Klasa 2 – Wiosna 2024 (25 zadań)</option>
-                    <!-- Klasa 3 -->
-                    <option value="k3_w2025" selected>Klasa 3 – Wiosna 2025 (26 zadań)</option>
-                    <option value="k3_j2024">Klasa 3 – Jesień 2024 (24 zadania)</option>
-                    <option value="k3_w2024">Klasa 3 – Wiosna 2024 (25 zadań)</option>
-                    <!-- Klasa 4 -->
-                    <option value="k4_w2025">Klasa 4 – Wiosna 2025 (25 zadań)</option>
-                    <option value="k4_j2024">Klasa 4 – Jesień 2024 (29 zadań)</option>
-                    <option value="k4_w2024">Klasa 4 – Wiosna 2024 (29 zadań)</option>
-                    <option value="k4_j2023">Klasa 4 – Jesień 2023 (29 zadań)</option>
-                </select>
-            </div>
-            <iframe id="pdfFrame" src="https://drive.google.com/file/d/1d5uqyxEFghwiZTNo11R74WFCcA-hbMJR/preview" allow="autoplay"></iframe>
+<div class="container">
+    <div class="card">
+        <div>
+            <h2><span class="icon">💻</span>Galaktyka Informatyki</h2>
+            <p>Informatyka 4 klasa.</p>
         </div>
-
-        <!-- Prawy panel: Karta odpowiedzi -->
-        <div class="answer-card">
-            <h2 id="sheetTitle">Karta Odpowiedzi – Klasa 3 (Wiosna 2025)</h2>
-            <form id="quiz-form">
-                
-                <div class="student-info">
-                    <div>
-                        <label for="imie" style="font-size:0.8rem; font-weight:600; display:block; margin-bottom:0.2rem;">Imię (DRUKOWANE):</label>
-                        <input type="text" id="imie" name="imie" required placeholder="np. JAN">
-                    </div>
-                    <div>
-                        <label for="nazwisko" style="font-size:0.8rem; font-weight:600; display:block; margin-bottom:0.2rem;">Nazwisko (DRUKOWANE):</label>
-                        <input type="text" id="nazwisko" name="nazwisko" required placeholder="np. KOWALSKI">
-                    </div>
-                </div>
-
-                <!-- Kontener na dynamicznie generowane pytania -->
-                <div id="questionsContainer" class="questions-grid"></div>
-
-                <button type="submit" class="btn-submit">Wyślij do sprawdzenia przez AI</button>
-            </form>
-
-            <div id="loading" class="loading">AI sprawdza poprawność odpowiedzi... ⏳</div>
-            <div id="ai-result"></div>
-        </div>
+        <a href="https://rolha83.github.io/Galaktyka-informatyki/" class="btn">Przejdź do Informatyki</a>
     </div>
 
-    <script>
-        // Słownik obejmujący pełne 14 plików w folderze Google Drive
-        const sheetsData = {
-            k1_w2025: {
-                title: "Karta Odpowiedzi – Klasa 1 (Wiosna 2025)",
-                url: "https://drive.google.com/file/d/1v6tfz03foWk1hHc3Zcvp5MsBPwrbPb2F/preview",
-                answers: {
-                    1: ["A"], 2: ["C"], 3: ["B"], 4: ["A", "B"], 5: ["B"], 
-                    6: ["B"], 7: ["D"], 8: ["A", "C"], 9: ["A", "D"], 10: ["C"],
-                    11: ["B"], 12: ["A"], 13: ["B"], 14: ["D"], 15: ["A"],
-                    16: ["C"], 17: ["B"], 18: ["A"], 19: ["B"], 20: ["D"],
-                    21: ["A"], 22: ["D"], 23: ["C"], 24: ["A"], 25: ["D"]
-                }
-            },
-            k1_j2024: {
-                title: "Karta Odpowiedzi – Klasa 1 (Jesień 2024)",
-                url: "https://drive.google.com/file/d/1QaGKkGmoYm9riRtCMaduZlaQoacSVXqH/preview",
-                answers: {
-                    1: ["B"], 2: ["A", "C"], 3: ["B"], 4: ["A", "C", "D"], 5: ["D"],
-                    6: ["A", "D"], 7: ["C"], 8: ["C"], 9: ["B"], 10: ["D"],
-                    11: ["A"], 12: ["C"], 13: ["B"], 14: ["C"], 15: ["C"],
-                    16: ["C"], 17: ["A"], 18: ["A"], 19: ["A"], 20: ["C"],
-                    21: ["A", "C", "D"], 22: ["B", "C"], 23: ["A"], 24: ["B"]
-                }
-            },
-            k1_w2024: {
-                title: "Karta Odpowiedzi – Klasa 1 (Wiosna 2024)",
-                url: "https://drive.google.com/file/d/1PDp9Vxjutccj0myXNN2oB-sVqtdjSEl8/preview",
-                answers: {
-                    1: ["A"], 2: ["B"], 3: ["C"], 4: ["A", "B", "C"], 5: ["A"],
-                    6: ["B"], 7: ["A"], 8: ["D"], 9: ["A"], 10: ["C"],
-                    11: ["A"], 12: ["B"], 13: ["B"], 14: ["C"], 15: ["D"],
-                    16: ["C"], 17: ["A"], 18: ["B"], 19: ["A"], 20: ["B"],
-                    21: ["A"], 22: ["B"], 23: ["B"], 24: ["A"], 25: ["D"]
-                }
-            },
-            k1_j2023: {
-                title: "Karta Odpowiedzi – Klasa 1 (Jesień 2023)",
-                url: "https://drive.google.com/file/d/1OKe7xGkBXmLGZApF3tJFta1n0Ikm1Fra/preview",
-                answers: {
-                    1: ["A"], 2: ["A", "B"], 3: ["A", "C"], 4: ["B"], 5: ["A"],
-                    6: ["A"], 7: ["B"], 8: ["C"], 9: ["C"], 10: ["D"],
-                    11: ["D"], 12: ["B"], 13: ["B"], 14: ["B"], 15: ["C"],
-                    16: ["C"], 17: ["B"], 18: ["B", "C"], 19: ["A"], 20: ["D"],
-                    21: ["A", "D"], 22: ["D"], 23: ["D"]
-                }
-            },
-            k2_w2025: {
-                title: "Karta Odpowiedzi – Klasa 2 (Wiosna 2025)",
-                url: "https://drive.google.com/file/d/11O_GoCPRoSZAIKNK5rFmtqm7Q6ulOP0P/preview",
-                answers: {
-                    1: ["A", "C"], 2: ["B"], 3: ["A", "C"], 4: ["D"], 5: ["D"],
-                    6: ["A", "C"], 7: ["B"], 8: ["A"], 9: ["B"], 10: ["D"],
-                    11: ["A"], 12: ["B", "C"], 13: ["A", "C"], 14: ["B"], 15: ["C"],
-                    16: ["B"], 17: ["A"], 18: ["A"], 19: ["A", "D"], 20: ["D"],
-                    21: ["D"], 22: ["B"], 23: ["A"], 24: ["B"], 25: ["A"]
-                }
-            },
-            k2_j2024: {
-                title: "Karta Odpowiedzi – Klasa 2 (Jesień 2024)",
-                url: "https://drive.google.com/file/d/1XpDEGzfEPX0qkgYzlhPOFBdiXttjNrK9/preview",
-                answers: {
-                    1: ["D"], 2: ["A"], 3: ["B", "D"], 4: ["D"], 5: ["C"],
-                    6: ["C"], 7: ["A", "B", "D"], 8: ["D"], 9: ["C"], 10: ["B"],
-                    11: ["B", "C"], 12: ["C"], 13: ["A"], 14: ["A", "B", "C"], 15: ["C"],
-                    16: ["B"], 17: ["B"], 18: ["B"], 19: ["B"], 20: ["C"],
-                    21: ["B", "C"], 22: ["C"], 23: ["B"], 24: ["B"]
-                }
-            },
-            k2_w2024: {
-                title: "Karta Odpowiedzi – Klasa 2 (Wiosna 2024)",
-                url: "https://drive.google.com/file/d/1TiTicddJsH7hehfCjFvH25wRnLE2hNaA/preview",
-                answers: {
-                    1: ["B"], 2: ["B"], 3: ["A"], 4: ["A", "B", "C"], 5: ["A"],
-                    6: ["D"], 7:
+    <div class="card">
+        <div>
+            <h2><span class="icon">📐</span>Matematyka – Konkurs Leon</h2>
+            <p>Arkusze, zadania treningowe i materiały dla klas 2–4 z prostym i sprawnym dostępem do ćwiczeń.</p>
+        </div>
+        <a href="https://rolha83.github.io/Matematyka/" class="btn">Przejdź do Matematyki</a>
+    </div>
+
+    <div class="card tinkercad">
+        <div>
+            <h2><span class="icon">🧩</span>Tinkercad</h2>
+            <p>Twórz proste modele 3D, ucz się projektowania i rozwijaj kreatywność dzięki platformie online.</p>
+        </div>
+        <a href="https://www.tinkercad.com/" target="_blank" rel="noopener noreferrer" class="btn">Otwórz Tinkercad</a>
+    </div>
+</div>
+
+</body>
+</html>
